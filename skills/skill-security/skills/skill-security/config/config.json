@@ -1,0 +1,38 @@
+{
+  "known_token_patterns": [
+    {"name": "figma_pat", "regex": "figd_[A-Za-z0-9_-]{10,}"},
+    {"name": "yatrack_token", "regex": "y0__[A-Za-z0-9_-]{10,}"},
+    {"name": "ticktick_objectid", "regex": "[0-9a-f]{24}"},
+    {"name": "oauth_access_token", "regex": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"},
+    {"name": "generic_bearer", "regex": "Bearer\\s+[A-Za-z0-9._~+/=-]{20,}"},
+    {"name": "generic_api_key", "regex": "(?:api[_-]?key|apikey)\\s*[:=]\\s*['\"][A-Za-z0-9_-]{16,}['\"]"},
+    {"name": "aws_key", "regex": "AKIA[0-9A-Z]{16}"},
+    {"name": "github_pat", "regex": "ghp_[A-Za-z0-9]{36}"},
+    {"name": "slack_token", "regex": "xox[baprs]-[A-Za-z0-9-]{10,}"},
+    {"name": "generic_secret", "regex": "(?:secret|password|passwd|pwd)\\s*[:=]\\s*['\"][^'\"]{8,}['\"]"}
+  ],
+  "personal_data_patterns": [
+    {"name": "email", "regex": "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"},
+    {"name": "russian_name", "regex": "[А-ЯЁ][а-яё]{1,20}\\s+[А-ЯЁ][а-яё]{1,20}"},
+    {"name": "ip_address", "regex": "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b"},
+    {"name": "env_file_ref", "regex": "\\.env(?:\\.[a-zA-Z]+)?"}
+  ],
+  "required_files": {
+    "api_skill": [
+      "SKILL.md",
+      "scripts/*_memory.py",
+      "scripts/*_auth.py",
+      "config/config.json",
+      "data/memory.json"
+    ]
+  },
+  "categories": [
+    "audit_finding",
+    "fix_pattern",
+    "wizard_insight",
+    "api_quirk",
+    "error_solution"
+  ],
+  "cache_ttl": 3600,
+  "max_stale_rounds": 3
+}

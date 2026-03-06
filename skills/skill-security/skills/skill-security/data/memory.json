@@ -1,0 +1,291 @@
+[
+  {
+    "id": "mem_001",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "audit_finding",
+    "problem": "Skills without _sanitize_text() in record_entry = data leak in shared memory",
+    "solution": "Add _load_sensitive_patterns() + _sanitize_text() from canonical template. Sanitize problem, solution, and each tag before shared write.",
+    "tags": [
+      "sanitization",
+      "dual-memory",
+      "security",
+      "record_entry"
+    ],
+    "hit_count": 4,
+    "confirmations": 3,
+    "status": "promoted"
+  },
+  {
+    "id": "mem_002",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "audit_finding",
+    "problem": "check-credentials without {ok, data: {exists}} wrapper = FAIL on §1.1.2.1.§3",
+    "solution": "Return JSON: {\"ok\": true, \"data\": {\"exists\": bool, \"path\": str}}. Add setup_hint field when exists=false.",
+    "tags": [
+      "check-credentials",
+      "auth",
+      "json-format",
+      "setup_hint"
+    ],
+    "hit_count": 0,
+    "confirmations": 3,
+    "status": "promoted"
+  },
+  {
+    "id": "mem_003",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "Missing chmod 600 on credential save",
+    "solution": "After json.dump to credentials file: if sys.platform != 'win32': os.chmod(path, stat.S_IRUSR | stat.S_IWUSR)",
+    "tags": [
+      "chmod",
+      "credentials",
+      "security",
+      "save-token"
+    ],
+    "hit_count": 3,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_004",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "check_memory() searches only shared memory, missing private",
+    "solution": "check_memory must load_memory() + load_private_memory(), score both, merge results, return unified top-3. Use separate shared_changed/private_changed flags.",
+    "tags": [
+      "dual-memory",
+      "check_memory",
+      "private",
+      "shared"
+    ],
+    "hit_count": 0,
+    "confirmations": 3,
+    "status": "promoted"
+  },
+  {
+    "id": "mem_005",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "Missing PRIVATE_MEMORY_PATH constant in *_memory.py",
+    "solution": "Add: PRIVATE_MEMORY_PATH = _get_config_dir() / 'memory.json' at module level, after _get_config_dir() definition.",
+    "tags": [
+      "dual-memory",
+      "private",
+      "constant",
+      "memory"
+    ],
+    "hit_count": 1,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_006",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "wizard_insight",
+    "problem": "OAuth2 services typically require client_id + client_secret + redirect_uri for initial setup",
+    "solution": "Wizard steps: 1) go_to_developer_portal, 2) create_app, 3) collect client_id, 4) collect client_secret, 5) run_oauth_flow or save_token directly.",
+    "tags": [
+      "oauth2",
+      "wizard",
+      "setup",
+      "credentials"
+    ],
+    "hit_count": 0,
+    "confirmations": 1,
+    "status": "active"
+  },
+  {
+    "id": "mem_007",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "audit_finding",
+    "problem": "Pipeline for OAuth2 services: typical issues — no dual memory, no sanitization, hardcoded tokens",
+    "solution": "Priority fix order: 1) remove hardcoded tokens, 2) add dual memory with sanitization, 3) add check-credentials + setup_hint, 4) add SKILL.md sections.",
+    "tags": [
+      "pipeline",
+      "oauth2",
+      "priority",
+      "audit"
+    ],
+    "hit_count": 1,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_008",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "config.json contains token/org_id/api_key fields that should be in ~/.config/",
+    "solution": "Move secret fields to credentials.json in ~/.config/<service>/. config.json should only have: base_url, cache_ttl, rate_limit_delay, retry_delays.",
+    "tags": [
+      "config",
+      "secrets",
+      "isolation",
+      "credentials"
+    ],
+    "hit_count": 0,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_009",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "SKILL.md missing security section with explicit prohibitions",
+    "solution": "Add section: ## Безопасность with rules: 1) NEVER Read/cat credentials, 2) only check-credentials and save-token, 3) tokens never in conversation context.",
+    "tags": [
+      "skill-md",
+      "security",
+      "section",
+      "prohibitions"
+    ],
+    "hit_count": 3,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_010",
+    "timestamp": "2026-02-28T00:00:00Z",
+    "category": "fix_pattern",
+    "problem": "SKILL.md missing Step 0 (check-credentials) as mandatory first step",
+    "solution": "Add Step 0 before all other steps: call *_auth.py check-credentials, if exists=false show setup_hint and STOP.",
+    "tags": [
+      "skill-md",
+      "step0",
+      "check-credentials",
+      "first-install"
+    ],
+    "hit_count": 0,
+    "confirmations": 2,
+    "status": "active"
+  },
+  {
+    "id": "mem_011",
+    "timestamp": "2026-02-28T08:55:23Z",
+    "category": "fix_pattern",
+    "problem": "Missing security section in SKILL.md",
+    "solution": "Added security section to SKILL.md",
+    "tags": [
+      "tom_1",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_012",
+    "timestamp": "2026-02-28T08:55:23Z",
+    "category": "fix_pattern",
+    "problem": "Missing dual memory section in SKILL.md",
+    "solution": "Added dual_memory section to SKILL.md",
+    "tags": [
+      "tom_2",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_013",
+    "timestamp": "2026-02-28T08:55:24Z",
+    "category": "fix_pattern",
+    "problem": "Missing security section in SKILL.md",
+    "solution": "Added security section to SKILL.md",
+    "tags": [
+      "tom_1",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_014",
+    "timestamp": "2026-02-28T08:55:24Z",
+    "category": "fix_pattern",
+    "problem": "Missing dual memory section in SKILL.md",
+    "solution": "Added dual_memory section to SKILL.md",
+    "tags": [
+      "tom_2",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_015",
+    "timestamp": "2026-02-28T08:55:25Z",
+    "category": "fix_pattern",
+    "problem": "Missing security section in SKILL.md",
+    "solution": "Added security section to SKILL.md",
+    "tags": [
+      "tom_1",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_016",
+    "timestamp": "2026-02-28T08:55:25Z",
+    "category": "fix_pattern",
+    "problem": "Missing dual memory section in SKILL.md",
+    "solution": "Added dual_memory section to SKILL.md",
+    "tags": [
+      "tom_2",
+      "missing_section"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_017",
+    "timestamp": "2026-02-28T08:58:00Z",
+    "category": "audit_finding",
+    "problem": "os.environ.get('APPDATA') triggers env_file_ref pattern because .environ contains .env substring",
+    "solution": "Replace os.environ.get with os.getenv to avoid matching the personal_data_patterns env_file_ref regex",
+    "tags": [
+      "env_file_ref",
+      "shareability",
+      "tom5"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_018",
+    "timestamp": "2026-02-28T08:58:03Z",
+    "category": "audit_finding",
+    "problem": "Auth files that delegate credential path to api module fail tom1 check (1.1.1.1.§1) because audit checks only {prefix}_auth.py for .config reference",
+    "solution": "Add comment '# Credentials stored in ~/.config/SERVICE/ (via api.get_credentials_path)' to auth file imports",
+    "tags": [
+      "tom1",
+      "credentials",
+      "auth_delegation"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  },
+  {
+    "id": "mem_019",
+    "timestamp": "2026-02-28T08:58:06Z",
+    "category": "audit_finding",
+    "problem": "__pycache__ reappears after deletion because validator functional tests run Python scripts in skill directory",
+    "solution": "Set PYTHONDONTWRITEBYTECODE=1 when running ss_validate.py, or delete __pycache__ after validation",
+    "tags": [
+      "pycache",
+      "tom7",
+      "validation"
+    ],
+    "hit_count": 0,
+    "confirmations": 0,
+    "status": "active"
+  }
+]

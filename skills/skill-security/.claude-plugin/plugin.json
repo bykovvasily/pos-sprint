@@ -1,0 +1,8 @@
+{
+  "name": "skill-security",
+  "description": "Global meta-skill for security auditing and rebuilding Claude Code skills. Analyzes any skill against a 7-volume checklist, rebuilds with dual memory and credential isolation, validates, and loops until 100% compliance.",
+  "author": {
+    "name": "Usatov Vladimir",
+    "email": "usatov.w@gmail.com"
+  }
+}

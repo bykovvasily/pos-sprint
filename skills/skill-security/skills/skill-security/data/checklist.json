@@ -1,0 +1,144 @@
+{
+  "version": "1.0",
+  "toms": [
+    {
+      "id": 1,
+      "name": "Безопасность",
+      "checks": [
+        {"id": "1.1.1.1.§1", "description": "Credentials stored ONLY in ~/.config/<service>/", "severity": "CRITICAL"},
+        {"id": "1.1.1.1.§2", "description": "No credentials.json, .env, *.token in skill directory", "severity": "CRITICAL"},
+        {"id": "1.1.1.1.§3", "description": "Platform-aware path (Linux/Mac vs Windows)", "severity": "HIGH"},
+        {"id": "1.1.1.1.2.§1", "description": "save_credentials() sets chmod 600 on Unix", "severity": "HIGH"},
+        {"id": "1.1.1.1.2.§2", "description": "Windows chmod skipped gracefully", "severity": "MEDIUM"},
+        {"id": "1.1.1.1.3.§1", "description": "Credentials file is JSON with indent=2", "severity": "LOW"},
+        {"id": "1.1.1.2.§1", "description": "No hardcoded tokens (figd_, y0__, etc.)", "severity": "CRITICAL"},
+        {"id": "1.1.1.2.§2", "description": "No OAuth access tokens (36-char hex/uuid)", "severity": "CRITICAL"},
+        {"id": "1.1.1.2.§3", "description": "No real client_secret values", "severity": "CRITICAL"},
+        {"id": "1.1.1.2.§4", "description": "No real org_id / board_id in code", "severity": "HIGH"},
+        {"id": "1.1.1.2.§5", "description": "No email addresses in code", "severity": "HIGH"},
+        {"id": "1.1.1.2.§6", "description": "No real user names (including Russian names)", "severity": "HIGH"},
+        {"id": "1.1.1.2.§7", "description": "No real project/queue keys", "severity": "HIGH"},
+        {"id": "1.1.2.1.§1", "description": "check-credentials checks ONLY file existence and size > 2 bytes", "severity": "CRITICAL"},
+        {"id": "1.1.2.1.§2", "description": "check-credentials NEVER reads file contents to stdout", "severity": "CRITICAL"},
+        {"id": "1.1.2.1.§3", "description": "check-credentials returns {ok: true, data: {exists: bool, path: str}}", "severity": "HIGH"},
+        {"id": "1.1.2.2.§1", "description": "setup_hint present when credentials not found", "severity": "HIGH"},
+        {"id": "1.1.2.2.§2", "description": "setup_hint contains step-by-step instructions", "severity": "MEDIUM"},
+        {"id": "1.1.3.1.§1", "description": "SKILL.md prohibits Read/cat/head credentials.json", "severity": "CRITICAL"},
+        {"id": "1.1.3.1.§2", "description": "SKILL.md prohibits outputting tokens to conversation", "severity": "CRITICAL"},
+        {"id": "1.1.3.1.§3", "description": "SKILL.md allows only check-credentials and save-token", "severity": "HIGH"},
+        {"id": "1.1.3.1.§4", "description": "Security section present in SKILL.md", "severity": "HIGH"},
+        {"id": "1.2.1.§1", "description": "config.json contains ONLY universal settings", "severity": "HIGH"},
+        {"id": "1.2.1.§2", "description": "config.json has NO tokens, org_id, api_key", "severity": "CRITICAL"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dual Memory",
+      "checks": [
+        {"id": "2.1.1.1.§1", "description": "Shared memory path: <skill>/data/memory.json", "severity": "HIGH"},
+        {"id": "2.1.1.1.§5", "description": "Shared data passes through _sanitize_text()", "severity": "CRITICAL"},
+        {"id": "2.1.1.2.§1", "description": "Private memory path: ~/.config/<service>/memory.json", "severity": "HIGH"},
+        {"id": "2.1.1.2.§5", "description": "Private data stored as-is without sanitization", "severity": "MEDIUM"},
+        {"id": "2.1.1.3.§1", "description": "MEMORY_PATH constant defined at module level", "severity": "MEDIUM"},
+        {"id": "2.1.1.3.§2", "description": "PRIVATE_MEMORY_PATH constant defined at module level", "severity": "MEDIUM"},
+        {"id": "2.1.2.1.§1", "description": "check_memory() loads from BOTH stores", "severity": "CRITICAL"},
+        {"id": "2.1.2.1.§3", "description": "Returns unified top-3 from both stores", "severity": "HIGH"},
+        {"id": "2.1.2.2.§1", "description": "Scoring: +2 per tag match in context", "severity": "MEDIUM"},
+        {"id": "2.1.2.2.§2", "description": "Scoring: +1 per token >3 chars in problem", "severity": "MEDIUM"},
+        {"id": "2.1.2.2.§3", "description": "Scoring: +0.5 per token >3 chars in solution", "severity": "MEDIUM"},
+        {"id": "2.1.2.3.§1", "description": "Hit count incremented on top-3 match", "severity": "LOW"},
+        {"id": "2.1.3.1.§1", "description": "Shared record: problem sanitized", "severity": "CRITICAL"},
+        {"id": "2.1.3.1.§2", "description": "Shared record: solution sanitized", "severity": "CRITICAL"},
+        {"id": "2.1.3.1.§3", "description": "Shared record: tags sanitized", "severity": "HIGH"},
+        {"id": "2.1.3.1.§5", "description": "Shared record ID format: mem_NNN", "severity": "MEDIUM"},
+        {"id": "2.1.3.2.§1", "description": "Private record: problem stored as-is", "severity": "MEDIUM"},
+        {"id": "2.1.3.2.§5", "description": "Private record ID format: prv_NNN", "severity": "MEDIUM"},
+        {"id": "2.1.3.3.§1", "description": "Entry fields: id, timestamp, category, problem, solution, tags, hit_count", "severity": "HIGH"},
+        {"id": "2.1.4.1.§1", "description": "_load_sensitive_patterns loads from credentials", "severity": "HIGH"},
+        {"id": "2.1.4.1.§2", "description": "Graceful handling when credentials absent", "severity": "MEDIUM"},
+        {"id": "2.1.4.2.§1-4", "description": "Exact-string matching for credential values", "severity": "HIGH"},
+        {"id": "2.1.4.3.§1-6", "description": "Regex matching for service-specific patterns", "severity": "HIGH"},
+        {"id": "2.1.5.1.§1", "description": "CLI record has --private flag", "severity": "HIGH"},
+        {"id": "2.1.5.2.§1", "description": "CLI list has --private flag", "severity": "HIGH"},
+        {"id": "2.1.5.3.§1", "description": "CLI check always searches BOTH stores", "severity": "HIGH"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "First-Install UX",
+      "checks": [
+        {"id": "3.1.1.1.§1", "description": "Step 0 is FIRST step in SKILL.md algorithm", "severity": "HIGH"},
+        {"id": "3.1.1.1.§2", "description": "Step 0 calls *_auth.py check-credentials", "severity": "HIGH"},
+        {"id": "3.1.1.1.§3", "description": "If no credentials — show instruction and STOP", "severity": "HIGH"},
+        {"id": "3.1.1.1.§4", "description": "Instruction from setup_hint in JSON response", "severity": "MEDIUM"},
+        {"id": "3.1.1.2.§1", "description": "*_auth.py exists", "severity": "HIGH"},
+        {"id": "3.1.1.2.§2", "description": "check-credentials command exists", "severity": "HIGH"},
+        {"id": "3.1.1.2.§3", "description": "save-token command exists", "severity": "HIGH"},
+        {"id": "3.1.1.2.§4", "description": "status command exists (validates token via API)", "severity": "MEDIUM"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Кеши и данные",
+      "checks": [
+        {"id": "4.1.1.§1", "description": "Caches stored in ~/.config/<service>/", "severity": "HIGH"},
+        {"id": "4.1.1.§3", "description": "data/*.json placeholders contain {} or []", "severity": "MEDIUM"},
+        {"id": "4.1.2.§1", "description": "CACHE_PATH uses ~/.config/ path", "severity": "HIGH"},
+        {"id": "4.1.3.§1", "description": "SKILL.md marks placeholder files", "severity": "LOW"},
+        {"id": "4.2.1.§1", "description": "data/memory.json is shared memory (sanitized)", "severity": "HIGH"},
+        {"id": "4.2.1.§3", "description": "No files with personal data in data/", "severity": "HIGH"},
+        {"id": "4.2.1.§4", "description": "No __pycache__ in package", "severity": "MEDIUM"}
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Shareability",
+      "checks": [
+        {"id": "5.1.1.§1", "description": "Package contains scripts (*.py)", "severity": "HIGH"},
+        {"id": "5.1.1.§2", "description": "Package contains config/config.json", "severity": "MEDIUM"},
+        {"id": "5.1.1.§3", "description": "Package contains data/memory.json (sanitized)", "severity": "HIGH"},
+        {"id": "5.1.1.§5", "description": "Package contains SKILL.md", "severity": "HIGH"},
+        {"id": "5.1.2.§1", "description": "No credentials.json in package", "severity": "CRITICAL"},
+        {"id": "5.1.2.§2", "description": "No real tokens or secrets in package", "severity": "CRITICAL"},
+        {"id": "5.1.2.§3", "description": "No real names, emails, org_ids in package", "severity": "HIGH"},
+        {"id": "5.1.2.§6", "description": "No .env files in package", "severity": "CRITICAL"},
+        {"id": "5.1.3.§1", "description": "No hardcoded profile choices", "severity": "MEDIUM"}
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Архитектура",
+      "checks": [
+        {"id": "6.1.1.§1", "description": "*_api.py — HTTP client exists", "severity": "HIGH"},
+        {"id": "6.1.1.§2", "description": "*_auth.py — credential management exists", "severity": "HIGH"},
+        {"id": "6.1.1.§3", "description": "*_memory.py — dual memory exists", "severity": "HIGH"},
+        {"id": "6.1.1.§4", "description": "config/config.json exists", "severity": "HIGH"},
+        {"id": "6.1.1.§5", "description": "SKILL.md exists", "severity": "HIGH"},
+        {"id": "6.1.3.§1", "description": "JSON output: {ok: true, data: {...}}", "severity": "HIGH"},
+        {"id": "6.1.3.§2", "description": "Error output: {ok: false, error: ..., error_type: ...}", "severity": "MEDIUM"},
+        {"id": "6.1.4.§1", "description": "RETRY_DELAYS = [1, 3, 10]", "severity": "MEDIUM"},
+        {"id": "6.1.4.§2", "description": "429 → read Retry-After, sleep, retry", "severity": "MEDIUM"},
+        {"id": "6.2.1.§1", "description": "SKILL.md Step 0: check-credentials", "severity": "HIGH"},
+        {"id": "6.2.1.§2", "description": "SKILL.md Step 1: check memory", "severity": "MEDIUM"},
+        {"id": "6.2.2.§1", "description": "Security section in SKILL.md", "severity": "HIGH"},
+        {"id": "6.2.3.§1", "description": "Dual memory section in SKILL.md", "severity": "HIGH"}
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Код",
+      "checks": [
+        {"id": "7.1.1.§1", "description": "All *.py files are valid Python 3", "severity": "CRITICAL"},
+        {"id": "7.1.1.§2", "description": "No syntax errors", "severity": "CRITICAL"},
+        {"id": "7.1.2.§1", "description": "All import chains are correct", "severity": "HIGH"},
+        {"id": "7.1.2.§2", "description": "sys.path.insert() used where needed", "severity": "MEDIUM"},
+        {"id": "7.1.2.§3", "description": "No circular imports", "severity": "HIGH"},
+        {"id": "7.1.3.§2", "description": "record_entry() has private=False parameter", "severity": "HIGH"},
+        {"id": "7.1.3.§3", "description": "record_memory() passes private to record_entry()", "severity": "HIGH"},
+        {"id": "7.1.3.§4", "description": "check_memory() searches both stores", "severity": "HIGH"},
+        {"id": "7.1.3.§5", "description": "_sanitize_text() called ONLY for shared entries", "severity": "CRITICAL"},
+        {"id": "7.1.4.§1", "description": "No __pycache__ directories in package", "severity": "MEDIUM"}
+      ]
+    }
+  ]
+}
