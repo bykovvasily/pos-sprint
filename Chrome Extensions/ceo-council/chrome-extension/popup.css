@@ -1,0 +1,30 @@
+:root {
+  --bg: #0f0f12;
+  --surface: #18181c;
+  --border: #2a2a30;
+  --text: #e4e4e7;
+  --muted: #71717a;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --radius: 8px;
+  --font: 'Segoe UI', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 320px; max-width: 100%; font-family: var(--font); font-size: 13px; background: var(--bg); color: var(--text); }
+.popup { padding: 12px; }
+.view { display: block; }
+.view.hidden { display: none; }
+.opinion-author { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); margin-bottom: 8px; }
+.opinion-text { font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; max-height: 220px; overflow-y: auto; padding-right: 4px; }
+.opinion-hint { font-size: 10px; color: var(--muted); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--border); }
+.title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.subtitle { font-size: 12px; color: var(--muted); margin-bottom: 14px; line-height: 1.4; }
+#view-analyze .btn-primary { width: 100%; }
+.status { font-size: 12px; color: var(--muted); margin-top: 10px; }
+.status.error { color: #f87171; }
+.error-text { font-size: 12px; color: #f87171; margin-bottom: 10px; white-space: pre-wrap; }
+.btn { padding: 8px 12px; border: none; border-radius: var(--radius); font-family: inherit; font-size: 12px; font-weight: 500; cursor: pointer; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-ghost { background: transparent; color: var(--muted); }
+.btn-ghost:hover { color: var(--text); }

@@ -81,7 +81,7 @@ Batch: sprint-X26
 |-------|----------|
 | [ai-bear-newsletter](skills/sbg075/ai-bear-newsletter) | AI-Bear newsletter — трансформация Notion-черновиков в статьи для LinkedIn/Substack |
 
-### [@YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME)
+### [@bykovvasily](https://github.com/bykovvasily)
 
 | Скилл | Описание |
 |-------|----------|
@@ -94,6 +94,7 @@ Batch: sprint-X26
 | Расширение | Автор | Описание |
 |------------|-------|----------|
 | [ev_garde](Chrome%20Extensions/ev_garde) | [@ev_garde](https://github.com/ev_garde) | Chrome-расширение new tab + скилл ai-bear-newsletter |
+| [ceo-council](Chrome%20Extensions/ceo-council) | [@bykovvasily](https://github.com/bykovvasily) | Оценка сайта тремя CEO (Джобс, Цукерберг, Лебедев) через Claude, мнения на русском |
 
 ## Участие
 

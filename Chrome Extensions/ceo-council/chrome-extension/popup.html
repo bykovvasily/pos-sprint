@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEO Council</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup">
+    <div id="view-opinion" class="view hidden">
+      <p id="opinion-author" class="opinion-author"></p>
+      <div id="opinion-text" class="opinion-text"></div>
+      <p class="opinion-hint">Следующий клик — другое мнение</p>
+    </div>
+    <div id="view-analyze" class="view">
+      <p class="title">CEO Council</p>
+      <p class="subtitle">Джобс, Цукерберг, Лебедев оценят этот сайт</p>
+      <button id="btn-analyze" class="btn btn-primary">Анализировать сайт</button>
+      <p id="analyze-status" class="status hidden"></p>
+    </div>
+    <div id="view-error" class="view hidden">
+      <p id="error-text" class="error-text"></p>
+      <button id="btn-retry" class="btn btn-ghost">Повторить</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

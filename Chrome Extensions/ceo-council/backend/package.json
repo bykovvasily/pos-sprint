@@ -1,0 +1,7 @@
+{
+  "name": "ceo-council-api",
+  "version": "1.0.0",
+  "description": "API для расширения CEO Council",
+  "main": "server.js",
+  "type": "module"
+}
