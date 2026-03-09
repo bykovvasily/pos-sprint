@@ -81,6 +81,12 @@ Batch: sprint-X26
 |-------|----------|
 | [ai-bear-newsletter](skills/sbg075/ai-bear-newsletter) | AI-Bear newsletter — трансформация Notion-черновиков в статьи для LinkedIn/Substack |
 
+### [@YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME)
+
+| Скилл | Описание |
+|-------|----------|
+| [roi-razvitie-draft](skills/roi-razvitie-draft) | Драфт документа к еженедельной встрече «Roi Развитие» (среда) — пункты для обсуждения и заметки |
+
 ## Chrome Extensions
 
 Расширения для браузера Chrome, созданные участниками спринта.
